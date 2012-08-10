@@ -69,6 +69,7 @@ class Tx_LogExample_Controller_DemoController extends Tx_Extbase_MVC_Controller_
 			'Tx_LogExample_Demonstration_Writer_File',
 			'Tx_LogExample_Demonstration_Writer_Database',
 			'Tx_LogExample_Demonstration_Writer_StdErr',
+			'Tx_LogExample_Demonstration_Writer_Email',
 
 				// Processor Demos
 			'Tx_LogExample_Demonstration_Processor_Introspection',
