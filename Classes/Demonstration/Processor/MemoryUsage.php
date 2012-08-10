@@ -27,7 +27,7 @@
  * Demonstrating the MemoryUsage Processor of the TYPO3 Logging API
  *
  */
-class Tx_LogExample_Demonstration_Processor_MemoryUsage {
+class Tx_LogExample_Demonstration_Processor_MemoryUsage extends Tx_LogExample_Demonstration_Processor_Abstract {
 
 	/**
 	 * Set Configuration
@@ -36,21 +36,13 @@ class Tx_LogExample_Demonstration_Processor_MemoryUsage {
 	 * @static
 	 */
 	static protected function initializeConfiguration() {
-		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['MemoryUsage'] = array(
+		parent::initializeConfiguration();
 
-				// Configure Processor
+			// Configure Processor
+		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['MemoryUsage'] = array(
 			'processorConfiguration' => array(
 				t3lib_log_Level::DEBUG => array(
 					't3lib_log_processor_MemoryUsage' => array(
-					)
-				)
-			),
-
-				// Configure Writer
-			'writerConfiguration' => array(
-				t3lib_log_Level::DEBUG => array(
-					't3lib_log_writer_File' => array(
-						'logFile' => 'typo3temp/tx_logexample/demo.log',
 					)
 				)
 			)
@@ -66,9 +58,9 @@ class Tx_LogExample_Demonstration_Processor_MemoryUsage {
 
 		self::initializeConfiguration();
 
-		$message = 'A debug message written to ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
-			' with additional data from the MemoryUsage Processor'
+		$message = 'This debug message has been written to ' .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
+			' with additional data from t3lib_log_processor_MemoryUsage'
 		;
 
 			// Get a logger for the class

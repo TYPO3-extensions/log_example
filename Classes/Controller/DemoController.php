@@ -46,36 +46,45 @@ class Tx_LogExample_Controller_DemoController extends Tx_Extbase_MVC_Controller_
 	}
 
 	/**
-	 * Demo Action
+	 * Execute all Demos and assign results to view
 	 *
 	 * @return void
 	 */
 	public function demoAction() {
 		$demos = array();
 
-			// Basic usage Demos
-		$demos[] = Tx_LogExample_Demonstration_Usage_Basic::execute();
-		$demos[] = Tx_LogExample_Demonstration_Usage_AdditionalData::execute();
-		$demos[] = Tx_LogExample_Demonstration_Usage_ShorthandSyntax::execute();
-		$demos[] = Tx_LogExample_Demonstration_Usage_MethodChaining::execute();
-		$demos[] = Tx_LogExample_Demonstration_Usage_Deprecation::execute();
+		$demoClasses = array(
 
-			// Writer Demos
-		$demos[] = Tx_LogExample_Demonstration_Writer_Syslog::execute();
-		$demos[] = Tx_LogExample_Demonstration_Writer_PhpErrorLog::execute();
-		$demos[] = Tx_LogExample_Demonstration_Writer_File::execute();
-		$demos[] = Tx_LogExample_Demonstration_Writer_Database::execute();
+				// Usage Demos
+			'Tx_LogExample_Demonstration_Usage_Basic',
+			'Tx_LogExample_Demonstration_Usage_AdditionalData',
+			'Tx_LogExample_Demonstration_Usage_ShorthandSyntax',
+			'Tx_LogExample_Demonstration_Usage_MethodChaining',
+			'Tx_LogExample_Demonstration_Usage_Deprecation',
+			'Tx_LogExample_Demonstration_Usage_LogLevels',
 
-			// Processor Demos
-		$demos[] = Tx_LogExample_Demonstration_Processor_Introspection::execute();
-		$demos[] = Tx_LogExample_Demonstration_Processor_Web::execute();
-		$demos[] = Tx_LogExample_Demonstration_Processor_MemoryUsage::execute();
-		$demos[] = Tx_LogExample_Demonstration_Processor_MemoryPeakUsage::execute();
+				// Writer Demos
+			'Tx_LogExample_Demonstration_Writer_Syslog',
+			'Tx_LogExample_Demonstration_Writer_PhpErrorLog',
+			'Tx_LogExample_Demonstration_Writer_File',
+			'Tx_LogExample_Demonstration_Writer_Database',
+			'Tx_LogExample_Demonstration_Writer_StdErr',
 
-		$this->view->assign('loggingConfiguration', $GLOBALS['TYPO3_CONF_VARS']['LOG']);
+				// Processor Demos
+			'Tx_LogExample_Demonstration_Processor_Introspection',
+			'Tx_LogExample_Demonstration_Processor_Web',
+			'Tx_LogExample_Demonstration_Processor_MemoryUsage',
+			'Tx_LogExample_Demonstration_Processor_MemoryPeakUsage',
+			'Tx_LogExample_Demonstration_Processor_Typo3Version',
+		);
+
+		foreach ($demoClasses as $class) {
+			$demos[$class] = $class::execute();
+		}
+
 		$this->view->assign('demos', $demos);
+		$this->view->assign('loggingConfiguration', $GLOBALS['TYPO3_CONF_VARS']['LOG']);
 
-		$this->logger->debug('demoAction in DemoController was executed');
 	}
 
 }

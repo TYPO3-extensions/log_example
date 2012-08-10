@@ -38,7 +38,9 @@ class Tx_LogExample_Demonstration_Usage_MethodChaining extends Tx_LogExample_Dem
 		self::initializeConfiguration();
 
 			// Method chaining
-		$message = 'A warning using method chaining';
+		$message = 'This warning has been written to ' .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Usage']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
+			' by calling t3lib_log_LogManager::getLogger(__CLASS__)->warning($message);';
 		t3lib_log_LogManager::getLogger(__CLASS__)->warning($message);
 
 		return $message;

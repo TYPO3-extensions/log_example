@@ -24,10 +24,10 @@
 ***************************************************************/
 
 /**
- * Demonstrating the file writer of the TYPO3 Logging API
+ * A demonstration for using StdErr LogWriter from the log_example extension.
  *
  */
-class Tx_LogExample_Demonstration_Writer_File {
+class Tx_LogExample_Demonstration_Writer_StdErr {
 
 	/**
 	 * Set Configuration
@@ -36,13 +36,12 @@ class Tx_LogExample_Demonstration_Writer_File {
 	 * @static
 	 */
 	static protected function initializeConfiguration() {
-		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File'] = array(
+		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['StdErr'] = array(
 			'writerConfiguration' => array(
-				t3lib_log_Level::ERROR => array(
-					't3lib_log_writer_File' => array(
-						'logFile' => 'typo3temp/logs/log_example/demo.log',
+				t3lib_log_Level::DEBUG => array(
+					'Tx_LogExample_Log_Writer_StdErr' => array(
 					)
-				),
+				)
 			)
 		);
 	}
@@ -56,17 +55,14 @@ class Tx_LogExample_Demonstration_Writer_File {
 
 		self::initializeConfiguration();
 
-		$message = 'This error message has been written to file ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File']['writerConfiguration'][t3lib_log_Level::ERROR]['t3lib_log_writer_File']['logFile'] .
-			' by using t3lib_log_writer_File'
-		;
-		$data = array('foo' => 'bar', 'faz' => 'baz');
-
 			// Get a logger for the class
 		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
 
-			// Write to Log
-		$logger->error($message, $data);
+		$message = 'This debug message has been written to php://stderr by using Tx_LogExample_Log_Writer_StdErr';
+		$data = array('foo' => 'bar', 'faz' => 'baz');
+
+			// Log method
+		$logger->debug($message, $data);
 
 		return $message;
 	}

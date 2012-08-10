@@ -38,7 +38,7 @@ class Tx_LogExample_Demonstration_Writer_PhpErrorLog {
 	static protected function initializeConfiguration() {
 		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['PhpErrorLog'] = array(
 			'writerConfiguration' => array(
-				t3lib_log_Level::DEBUG => array(
+				t3lib_log_Level::ERROR => array(
 					't3lib_log_writer_PhpErrorLog' => array(
 					)
 				),
@@ -55,14 +55,14 @@ class Tx_LogExample_Demonstration_Writer_PhpErrorLog {
 
 		self::initializeConfiguration();
 
-		$message = 'A debug message written to PHP error_log()';
+		$message = 'This error message has been written to PHP error_log() by using t3lib_log_writer_PhpErrorLog';
 		$data = array('foo' => 'bar', 'faz' => 'baz');
 
 			// Get a logger for the class
 		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
 
 			// Write to Log
-		$logger->debug($message, $data);
+		$logger->error($message, $data);
 
 		return $message;
 	}

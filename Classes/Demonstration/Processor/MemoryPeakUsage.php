@@ -27,7 +27,7 @@
  * Demonstrating the MemoryPeakUsage Processor of the TYPO3 Logging API
  *
  */
-class Tx_LogExample_Demonstration_Processor_MemoryPeakUsage {
+class Tx_LogExample_Demonstration_Processor_MemoryPeakUsage extends Tx_LogExample_Demonstration_Processor_Abstract {
 
 	/**
 	 * Set Configuration
@@ -36,22 +36,14 @@ class Tx_LogExample_Demonstration_Processor_MemoryPeakUsage {
 	 * @static
 	 */
 	static protected function initializeConfiguration() {
-		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['MemoryPeakUsage'] = array(
+		parent::initializeConfiguration();
 
-				// Configure Processor
+			// Configure Processor
+		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['MemoryPeakUsage'] = array(
 			'processorConfiguration' => array(
 				t3lib_log_Level::DEBUG => array(
 					't3lib_log_processor_MemoryPeakUsage' => array(
 						'realMemoryUsage' => TRUE,
-					)
-				)
-			),
-
-				// Configure Writer
-			'writerConfiguration' => array(
-				t3lib_log_Level::DEBUG => array(
-					't3lib_log_writer_File' => array(
-						'logFile' => 'typo3temp/tx_logexample/demo.log',
 					)
 				)
 			)
@@ -67,9 +59,9 @@ class Tx_LogExample_Demonstration_Processor_MemoryPeakUsage {
 
 		self::initializeConfiguration();
 
-		$message = 'A debug message written to ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
-			' with additional data from the MemoryPeakUsage Processor'
+		$message = 'This debug message has been written to ' .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
+			' with additional data from t3lib_log_processor_MemoryPeakUsage'
 		;
 
 			// Get a logger for the class

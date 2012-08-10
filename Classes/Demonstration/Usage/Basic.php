@@ -41,7 +41,9 @@ class Tx_LogExample_Demonstration_Usage_Basic extends Tx_LogExample_Demonstratio
 		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
 
 			// Log method
-		$message = 'A warning using the basic log method';
+		$message = 'This warning has been written to ' .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Usage']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
+			' by calling $logger->log(t3lib_log_Level::WARNING, $message);';
 		$logger->log(t3lib_log_Level::WARNING, $message);
 
 		return $message;

@@ -24,28 +24,10 @@
 ***************************************************************/
 
 /**
- * Demonstrating the file writer of the TYPO3 Logging API
+ * A demonstration for the Basic Log Method of the TYPO3 Logging API
  *
  */
-class Tx_LogExample_Demonstration_Writer_File {
-
-	/**
-	 * Set Configuration
-	 *
-	 * @return void
-	 * @static
-	 */
-	static protected function initializeConfiguration() {
-		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File'] = array(
-			'writerConfiguration' => array(
-				t3lib_log_Level::ERROR => array(
-					't3lib_log_writer_File' => array(
-						'logFile' => 'typo3temp/logs/log_example/demo.log',
-					)
-				),
-			)
-		);
-	}
+class Tx_LogExample_Demonstration_Usage_LogLevels extends Tx_LogExample_Demonstration_Usage_Abstract {
 
 	/**
 	 * Execute the demo
@@ -53,20 +35,24 @@ class Tx_LogExample_Demonstration_Writer_File {
 	 * @return string A speaking message
 	 */
 	static public function execute() {
-
 		self::initializeConfiguration();
-
-		$message = 'This error message has been written to file ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File']['writerConfiguration'][t3lib_log_Level::ERROR]['t3lib_log_writer_File']['logFile'] .
-			' by using t3lib_log_writer_File'
-		;
-		$data = array('foo' => 'bar', 'faz' => 'baz');
 
 			// Get a logger for the class
 		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
 
-			// Write to Log
-		$logger->error($message, $data);
+			// Log method
+		$message = '8 messages have been written to ' .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Usage']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
+			' by logging with all different severity levels.';
+
+		$logger->debug($message);
+		$logger->info($message);
+		$logger->notice($message);
+		$logger->warning($message);
+		$logger->error($message);
+		$logger->alert($message);
+		$logger->critical($message);
+		$logger->emergency($message);
 
 		return $message;
 	}

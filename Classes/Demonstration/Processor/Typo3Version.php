@@ -24,10 +24,10 @@
 ***************************************************************/
 
 /**
- * Demonstrating the file writer of the TYPO3 Logging API
+ * Demonstrating the Typo3Version Processor from the log_example extension.
  *
  */
-class Tx_LogExample_Demonstration_Writer_File {
+class Tx_LogExample_Demonstration_Processor_Typo3Version extends Tx_LogExample_Demonstration_Processor_Abstract {
 
 	/**
 	 * Set Configuration
@@ -36,13 +36,15 @@ class Tx_LogExample_Demonstration_Writer_File {
 	 * @static
 	 */
 	static protected function initializeConfiguration() {
-		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File'] = array(
-			'writerConfiguration' => array(
-				t3lib_log_Level::ERROR => array(
-					't3lib_log_writer_File' => array(
-						'logFile' => 'typo3temp/logs/log_example/demo.log',
+		parent::initializeConfiguration();
+
+			// Configure Processor
+		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['Typo3Version'] = array(
+			'processorConfiguration' => array(
+				t3lib_log_Level::DEBUG => array(
+					'Tx_LogExample_Log_Processor_Typo3Version' => array(
 					)
-				),
+				)
 			)
 		);
 	}
@@ -56,17 +58,16 @@ class Tx_LogExample_Demonstration_Writer_File {
 
 		self::initializeConfiguration();
 
-		$message = 'This error message has been written to file ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File']['writerConfiguration'][t3lib_log_Level::ERROR]['t3lib_log_writer_File']['logFile'] .
-			' by using t3lib_log_writer_File'
+		$message = 'This debug message has been written to ' .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
+			' with additional data from Tx_LogExample_Log_Processor_Typo3Version'
 		;
-		$data = array('foo' => 'bar', 'faz' => 'baz');
 
 			// Get a logger for the class
 		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
 
 			// Write to Log
-		$logger->error($message, $data);
+		$logger->debug($message);
 
 		return $message;
 	}

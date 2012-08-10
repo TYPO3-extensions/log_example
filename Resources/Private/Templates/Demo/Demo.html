@@ -1,13 +1,14 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-    <h2>Logging results</h2>
+    <h2>Summary of the Logging Demos which have just been executed</h2>
 
-    <ul>
-        <f:for each="{demos}" as="demo">
-            <li>Executing: {demo}</li>
+    <dl>
+        <f:for each="{demos}" as="demo" key="class">
+            <dt style="margin-top: 12px;">Results from calling {class}::execute()</dt>
+            <dd style="margin-top: 4px;">{demo}</dd>
         </f:for>
-    </ul>
+    </dl>
 
     <h2>Configuration</h2>
     <f:debug title="$TYPO3_CONF_VARS['LOG']" maxDepth="255" inline="1">{loggingConfiguration}</f:debug>

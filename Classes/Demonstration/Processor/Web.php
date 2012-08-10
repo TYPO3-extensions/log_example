@@ -27,7 +27,7 @@
  * Demonstrating the Web Processor of the TYPO3 Logging API
  *
  */
-class Tx_LogExample_Demonstration_Processor_Web {
+class Tx_LogExample_Demonstration_Processor_Web extends Tx_LogExample_Demonstration_Processor_Abstract {
 
 	/**
 	 * Set Configuration
@@ -36,21 +36,13 @@ class Tx_LogExample_Demonstration_Processor_Web {
 	 * @static
 	 */
 	static protected function initializeConfiguration() {
-		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['Web'] = array(
+		parent::initializeConfiguration();
 
-				// Configure Processor
+			// Configure Processor
+		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['Web'] = array(
 			'processorConfiguration' => array(
 				t3lib_log_Level::DEBUG => array(
 					't3lib_log_processor_Web' => array(
-					)
-				)
-			),
-
-				// Configure Writer
-			'writerConfiguration' => array(
-				t3lib_log_Level::DEBUG => array(
-					't3lib_log_writer_File' => array(
-						'logFile' => 'typo3temp/tx_logexample/demo.log',
 					)
 				)
 			)
@@ -66,9 +58,9 @@ class Tx_LogExample_Demonstration_Processor_Web {
 
 		self::initializeConfiguration();
 
-		$message = 'A debug message written to ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
-			' with additional data from the Web Processor'
+		$message = 'This debug message has been written to ' .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
+			' with additional data from t3lib_log_processor_Web'
 		;
 
 			// Get a logger for the class

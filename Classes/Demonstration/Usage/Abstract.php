@@ -40,7 +40,7 @@ abstract class Tx_LogExample_Demonstration_Usage_Abstract {
 			'writerConfiguration' => array(
 				t3lib_log_Level::DEBUG => array(
 					't3lib_log_writer_File' => array(
-						'logFile' => 'typo3temp/tx_logexample/demo.log',
+						'logFile' => 'typo3temp/logs/log_example/demo.log',
 					)
 				)
 			)

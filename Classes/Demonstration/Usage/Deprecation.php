@@ -37,9 +37,14 @@ class Tx_LogExample_Demonstration_Usage_Deprecation extends Tx_LogExample_Demons
 	static public function execute() {
 		self::initializeConfiguration();
 
+		$message = 'This deprecation warning has been written to ' .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['deprecated']['writerConfiguration'][t3lib_log_Level::WARNING]['t3lib_log_writer_File']['logFile'] .
+			' by calling the deprecated method Tx_LogExample_Demonstration_Deprecation::legacyFunction().' .
+			' (This demo will only work once the deprecation log has integrated the new Logging API!)'
+		;
+
 			// Call a deprecated function
-		$message = 'A deprecation log entry by calling the deprecated function Tx_LogExample_Demonstration_Deprecation::myDeprecatedDemo()';
-		self::myDeprecatedDemo();
+		self::legacyFunction();
 
 		return $message;
 	}
@@ -51,7 +56,7 @@ class Tx_LogExample_Demonstration_Usage_Deprecation extends Tx_LogExample_Demons
 	 * @deprecated
 	 * @return void
 	 */
-	static protected function myDeprecatedDemo() {
+	static protected function legacyFunction() {
 		t3lib_div::logDeprecatedFunction();
 	}
 }

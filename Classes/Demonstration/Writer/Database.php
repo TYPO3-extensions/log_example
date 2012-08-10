@@ -38,7 +38,7 @@ class Tx_LogExample_Demonstration_Writer_Database {
 	static protected function initializeConfiguration() {
 		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['Database'] = array(
 			'writerConfiguration' => array(
-				t3lib_log_Level::DEBUG => array(
+				t3lib_log_Level::ERROR => array(
 					't3lib_log_writer_Database' => array(
 					)
 				),
@@ -55,14 +55,14 @@ class Tx_LogExample_Demonstration_Writer_Database {
 
 		self::initializeConfiguration();
 
-		$message = 'A debug message written to database into sys_log table';
+		$message = 'This error message has been written to the sys_log table in your database by using t3lib_log_writer_Database.';
 		$data = array('foo' => 'bar', 'faz' => 'baz');
 
 			// Get a logger for the class
 		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
 
 			// Write to Log
-		$logger->debug($message, $data);
+		$logger->error($message, $data);
 
 		return $message;
 	}

@@ -2,8 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2012 Steffen Müller <typo3@t3node.com>
-*
+* (c) 2012 Steffen Müller (typo3@t3node.com)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,32 +22,28 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+
 /**
- * A demonstration for Additional Data in Log Records of the TYPO3 Logging API
+ * Log writer that writes to php://stderr
+ * Demonstrates how to extend the Logging API with a new LogWriter
  *
+ * @author Steffen Müller <typo3@t3node.com>
+ * @package TYPO3
+ * @subpackage t3lib
  */
-class Tx_LogExample_Demonstration_Usage_AdditionalData extends Tx_LogExample_Demonstration_Usage_Abstract {
+class Tx_LogExample_Log_Writer_StdErr extends t3lib_log_writer_Abstract {
 
 	/**
-	 * Execute the demo
+	 * Writes the log record to php://stderr
 	 *
-	 * @return string A speaking message
+	 * @param t3lib_log_Record $record Log record
+	 * @return t3lib_log_Record
 	 */
-	static public function execute() {
-		self::initializeConfiguration();
+	public function writeLog(t3lib_log_Record $record) {
 
-			// Get a logger for the class
-		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
+		file_put_contents('php://stderr', (string)$record);
 
-			// Log method
-		$message = 'This warning with some additional data has been written to ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Usage']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
-			' by calling $logger->log(t3lib_log_Level::WARNING, $message);';
-		$data = array('foo' => 'bar', 'faz' => 'baz');
-
-		$logger->log(t3lib_log_Level::WARNING, $message, $data);
-
-		return $message;
+		return $record;
 	}
 }
 

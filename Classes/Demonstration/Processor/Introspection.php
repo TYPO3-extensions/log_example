@@ -27,7 +27,7 @@
  * Demonstrating the Introspection Processor of the TYPO3 Logging API
  *
  */
-class Tx_LogExample_Demonstration_Processor_Introspection {
+class Tx_LogExample_Demonstration_Processor_Introspection extends Tx_LogExample_Demonstration_Processor_Abstract {
 
 	/**
 	 * Set Configuration
@@ -36,24 +36,16 @@ class Tx_LogExample_Demonstration_Processor_Introspection {
 	 * @static
 	 */
 	static protected function initializeConfiguration() {
-		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['Introspection'] = array(
+		parent::initializeConfiguration();
 
-				// Configure Processor
+			// Configure Processor
+		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['Introspection'] = array(
 			'processorConfiguration' => array(
 				t3lib_log_Level::DEBUG => array(
 					't3lib_log_processor_Introspection' => array(
 					)
 				)
 			),
-
-				// Configure Writer
-			'writerConfiguration' => array(
-				t3lib_log_Level::DEBUG => array(
-					't3lib_log_writer_File' => array(
-						'logFile' => 'typo3temp/tx_logexample/demo.log',
-					)
-				)
-			)
 		);
 	}
 
@@ -66,9 +58,9 @@ class Tx_LogExample_Demonstration_Processor_Introspection {
 
 		self::initializeConfiguration();
 
-		$message = 'A debug message written to ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
-			' with additional data from the Introspection Processor'
+		$message = 'This debug message has been written to ' .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
+			' with additional data from t3lib_log_processor_Introspection'
 		;
 
 			// Get a logger for the class
