@@ -41,7 +41,7 @@ class Tx_LogExample_Log_Writer_StdErr extends t3lib_log_writer_Abstract {
 	 */
 	public function writeLog(t3lib_log_Record $record) {
 
-		file_put_contents('php://stderr', (string)$record);
+		file_put_contents('php://stderr', (string)$record . PHP_EOL);
 
 		return $record;
 	}
