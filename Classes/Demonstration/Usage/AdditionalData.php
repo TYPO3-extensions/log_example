@@ -38,7 +38,7 @@ class Tx_LogExample_Demonstration_Usage_AdditionalData extends Tx_LogExample_Dem
 		self::initializeConfiguration();
 
 			// Get a logger for the class
-		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
+		$logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
 
 			// Log method
 		$message = 'This warning with some additional data has been written to ' .

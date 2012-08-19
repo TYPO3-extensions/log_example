@@ -64,7 +64,7 @@ class Tx_LogExample_Demonstration_Processor_MemoryUsage extends Tx_LogExample_De
 		;
 
 			// Get a logger for the class
-		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
+		$logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
 
 			// Write to Log
 		$logger->debug($message);

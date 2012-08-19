@@ -59,7 +59,7 @@ class Tx_LogExample_Demonstration_Writer_PhpErrorLog {
 		$data = array('foo' => 'bar', 'faz' => 'baz');
 
 			// Get a logger for the class
-		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
+		$logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
 
 			// Write to Log
 		$logger->error($message, $data);

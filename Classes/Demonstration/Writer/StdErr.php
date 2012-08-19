@@ -56,7 +56,7 @@ class Tx_LogExample_Demonstration_Writer_StdErr {
 		self::initializeConfiguration();
 
 			// Get a logger for the class
-		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
+		$logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
 
 		$message = 'This debug message has been written to php://stderr by using Tx_LogExample_Log_Writer_StdErr';
 		$data = array('foo' => 'bar', 'faz' => 'baz');

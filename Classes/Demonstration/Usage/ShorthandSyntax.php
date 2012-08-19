@@ -38,7 +38,7 @@ class Tx_LogExample_Demonstration_Usage_ShorthandSyntax extends Tx_LogExample_De
 		self::initializeConfiguration();
 
 			// Get a logger for the class
-		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
+		$logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
 
 			// Shorthand Syntax
 		$message = 'This warning has been written to ' .

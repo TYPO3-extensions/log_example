@@ -42,7 +42,7 @@ class Tx_LogExample_Controller_DemoController extends Tx_Extbase_MVC_Controller_
 	 * @return void
 	 */
 	public function initializeAction() {
-		$this->logger = t3lib_log_LogManager::getLogger(__CLASS__);
+		$this->logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
 	}
 
 	/**

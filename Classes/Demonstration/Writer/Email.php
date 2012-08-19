@@ -63,7 +63,7 @@ class Tx_LogExample_Demonstration_Writer_Email {
 		self::initializeConfiguration();
 
 			// Get a logger for the class
-		$logger = t3lib_log_LogManager::getLogger(__CLASS__);
+		$logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
 
 		$message = 'This emergency message has been send by email to ' .
 			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['Email']['writerConfiguration'][t3lib_log_Level::EMERGENCY]['Tx_LogWriteremail_Log_Writer_Email']['recipient'] .
