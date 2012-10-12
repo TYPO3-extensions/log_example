@@ -62,6 +62,7 @@ class Tx_LogExample_Controller_DemoController extends Tx_Extbase_MVC_Controller_
 			'Tx_LogExample_Demonstration_Usage_MethodChaining',
 			'Tx_LogExample_Demonstration_Usage_Deprecation',
 			'Tx_LogExample_Demonstration_Usage_LogLevels',
+			'TYPO3\\CMS\\LogExample\\Demonstration\\Usage\\NamespaceDemonstration',
 
 				// Writer Demos
 			'Tx_LogExample_Demonstration_Writer_Syslog',
