@@ -86,10 +86,6 @@ class Tx_LogExample_Controller_DemoController extends Tx_Extbase_MVC_Controller_
 		$this->view->assign('demos', $demos);
 		$this->view->assign('loggingConfiguration', $GLOBALS['TYPO3_CONF_VARS']['LOG']);
 
-		$version = t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version);
-		if ($version < 4007000) {
-			$this->view->assign('debugLegacy', 'TRUE');
-		}
 	}
 
 }

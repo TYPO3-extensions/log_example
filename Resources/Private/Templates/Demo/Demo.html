@@ -11,12 +11,5 @@
     </dl>
 
     <h2>Configuration</h2>
-    <f:if condition="{debugLegacy}">
-        <f:then>
-            <f:render partial="Demo/DebugLegacy" arguments="{loggingConfiguration: loggingConfiguration}"/>
-        </f:then>
-        <f:else>
-            <f:render partial="Demo/Debug" arguments="{loggingConfiguration: loggingConfiguration}"/>
-        </f:else>
-    </f:if>
+    <f:debug title="$TYPO3_CONF_VARS['LOG']" maxDepth="255" inline="1">{loggingConfiguration}</f:debug>
 </f:section>
