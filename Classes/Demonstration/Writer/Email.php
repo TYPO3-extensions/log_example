@@ -38,7 +38,7 @@ class Tx_LogExample_Demonstration_Writer_Email {
 	static protected function initializeConfiguration() {
 		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['Email'] = array(
 			'writerConfiguration' => array(
-				t3lib_log_Level::EMERGENCY => array(
+				\TYPO3\CMS\Core\Log\LogLevel::EMERGENCY => array(
 					'Tx_LogWriteremail_Log_Writer_Email' => array(
 						'recipient' => 'foo@example.com',
 						'sender' => 'bar@example.com',
@@ -56,24 +56,25 @@ class Tx_LogExample_Demonstration_Writer_Email {
 	static public function execute() {
 
 		$extKey = 'log_writeremail';
-		if (!t3lib_extMgm::isLoaded($extKey)) {
+		if (!\TYPO3\CMS\Core\Extension\ExtensionManager::isLoaded($extKey)) {
 			return 'Warning. Could not send log to E-Mail, because Extension ' . $extKey . ' is not installed. It can be found at forge.typo3.org';
 		}
 
 		self::initializeConfiguration();
 
-			// Get a logger for the class
-		$logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
-
-		$message = 'This emergency message has been send by email to ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['Email']['writerConfiguration'][t3lib_log_Level::EMERGENCY]['Tx_LogWriteremail_Log_Writer_Email']['recipient'] .
-			' by using Tx_LogWriteremail_Log_Writer_Email';
-		$data = array('foo' => 'bar', 'faz' => 'baz');
+			/** @var \TYPO3\CMS\Core\Log\Logger $logger */
+		$logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
 
 			// Temporarily set mail transport to mbox.
 		$originalMailConfiguration = $GLOBALS['TYPO3_CONF_VARS']['MAIL'];
 		$GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'mbox';
 		$GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_mbox_file'] = 'typo3temp/logs/log_example/email-logs.mbox';
+
+		$message = 'This emergency message has been send by email to ' .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['Email']['writerConfiguration'][\TYPO3\CMS\Core\Log\LogLevel::EMERGENCY]['Tx_LogWriteremail_Log_Writer_Email']['recipient'] .
+			' by using Tx_LogWriteremail_Log_Writer_Email shipped with EXT:' . $extKey .
+			'. The mail was not sent via smtp, but saved into file ' . $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_mbox_file'];
+		$data = array('foo' => 'bar', 'faz' => 'baz');
 
 			// Log method
 		$logger->emergency($message, $data);

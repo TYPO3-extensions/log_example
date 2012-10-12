@@ -32,7 +32,7 @@ class Tx_LogExample_Controller_DemoController extends Tx_Extbase_MVC_Controller_
 	/**
 	 * A logger instance for this class
 	 *
-	 * @var t3lib_log_Logger
+	 * @var \TYPO3\CMS\Core\Log\Logger
 	 */
 	protected $logger;
 
@@ -42,7 +42,7 @@ class Tx_LogExample_Controller_DemoController extends Tx_Extbase_MVC_Controller_
 	 * @return void
 	 */
 	public function initializeAction() {
-		$this->logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
+		$this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
 	}
 
 	/**

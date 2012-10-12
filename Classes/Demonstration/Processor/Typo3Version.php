@@ -41,7 +41,7 @@ class Tx_LogExample_Demonstration_Processor_Typo3Version extends Tx_LogExample_D
 			// Configure Processor
 		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['Typo3Version'] = array(
 			'processorConfiguration' => array(
-				t3lib_log_Level::DEBUG => array(
+				\TYPO3\CMS\Core\Log\LogLevel::DEBUG => array(
 					'Tx_LogExample_Log_Processor_Typo3Version' => array(
 					)
 				)
@@ -59,12 +59,12 @@ class Tx_LogExample_Demonstration_Processor_Typo3Version extends Tx_LogExample_D
 		self::initializeConfiguration();
 
 		$message = 'This debug message has been written to ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['writerConfiguration'][\TYPO3\CMS\Core\Log\LogLevel::DEBUG]['\\TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter']['logFile'] .
 			' with additional data from Tx_LogExample_Log_Processor_Typo3Version'
 		;
 
-			// Get a logger for the class
-		$logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
+			/** @var \TYPO3\CMS\Core\Log\Logger $logger */
+		$logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
 
 			// Write to Log
 		$logger->debug($message);

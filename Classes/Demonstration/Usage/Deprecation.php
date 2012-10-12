@@ -38,7 +38,7 @@ class Tx_LogExample_Demonstration_Usage_Deprecation extends Tx_LogExample_Demons
 		self::initializeConfiguration();
 
 		$message = 'This deprecation warning has been written to ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['deprecated']['writerConfiguration'][t3lib_log_Level::WARNING]['t3lib_log_writer_File']['logFile'] .
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['deprecated']['writerConfiguration'][\TYPO3\CMS\Core\Log\LogLevel::WARNING]['\\TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter']['logFile'] .
 			' by calling the deprecated method Tx_LogExample_Demonstration_Deprecation::legacyFunction().' .
 			' (This demo will only work once the deprecation log has integrated the new Logging API!)'
 		;
@@ -57,7 +57,7 @@ class Tx_LogExample_Demonstration_Usage_Deprecation extends Tx_LogExample_Demons
 	 * @return void
 	 */
 	static protected function legacyFunction() {
-		t3lib_div::logDeprecatedFunction();
+		\TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
 	}
 }
 

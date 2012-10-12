@@ -38,7 +38,7 @@ class Tx_LogExample_Demonstration_Writer_StdErr {
 	static protected function initializeConfiguration() {
 		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['StdErr'] = array(
 			'writerConfiguration' => array(
-				t3lib_log_Level::DEBUG => array(
+				\TYPO3\CMS\Core\Log\LogLevel::DEBUG => array(
 					'Tx_LogExample_Log_Writer_StdErr' => array(
 					)
 				)
@@ -55,8 +55,8 @@ class Tx_LogExample_Demonstration_Writer_StdErr {
 
 		self::initializeConfiguration();
 
-			// Get a logger for the class
-		$logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
+			/** @var \TYPO3\CMS\Core\Log\Logger $logger */
+		$logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
 
 		$message = 'This debug message has been written to php://stderr by using Tx_LogExample_Log_Writer_StdErr';
 		$data = array('foo' => 'bar', 'faz' => 'baz');

@@ -38,8 +38,8 @@ abstract class Tx_LogExample_Demonstration_Processor_Abstract {
 	static protected function initializeConfiguration() {
 		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor'] = array(
 			'writerConfiguration' => array(
-				t3lib_log_Level::DEBUG => array(
-					't3lib_log_writer_File' => array(
+				\TYPO3\CMS\Core\Log\LogLevel::DEBUG => array(
+					'\\TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter' => array(
 						'logFile' => 'typo3temp/logs/log_example/demo.log',
 					)
 				)

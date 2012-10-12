@@ -41,8 +41,8 @@ class Tx_LogExample_Demonstration_Processor_MemoryPeakUsage extends Tx_LogExampl
 			// Configure Processor
 		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['MemoryPeakUsage'] = array(
 			'processorConfiguration' => array(
-				t3lib_log_Level::DEBUG => array(
-					't3lib_log_processor_MemoryPeakUsage' => array(
+				\TYPO3\CMS\Core\Log\LogLevel::DEBUG => array(
+					'\\TYPO3\\CMS\\Core\\Log\\Processor\\MemoryPeakUsageProcessor' => array(
 						'realMemoryUsage' => TRUE,
 					)
 				)
@@ -60,12 +60,12 @@ class Tx_LogExample_Demonstration_Processor_MemoryPeakUsage extends Tx_LogExampl
 		self::initializeConfiguration();
 
 		$message = 'This debug message has been written to ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['writerConfiguration'][t3lib_log_Level::DEBUG]['t3lib_log_writer_File']['logFile'] .
-			' with additional data from t3lib_log_processor_MemoryPeakUsage'
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Processor']['writerConfiguration'][\TYPO3\CMS\Core\Log\LogLevel::DEBUG]['\\TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter']['logFile'] .
+			' with additional data from MemoryPeakUsageProcessor'
 		;
 
-			// Get a logger for the class
-		$logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
+			/** @var \TYPO3\CMS\Core\Log\Logger $logger */
+		$logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
 
 			// Write to Log
 		$logger->debug($message);

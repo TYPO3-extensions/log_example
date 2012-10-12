@@ -31,15 +31,15 @@
  * @package TYPO3
  * @subpackage t3lib
  */
-class Tx_LogExample_Log_Processor_Typo3Version extends t3lib_log_processor_Abstract {
+class Tx_LogExample_Log_Processor_Typo3Version extends \TYPO3\CMS\Core\Log\Processor\AbstractProcessor {
 
 	/**
 	 * Processes a log record and adds TYPO3 version data.
 	 *
-	 * @param t3lib_log_Record $logRecord The log record to process
-	 * @return t3lib_log_Record The processed log record with additional data
+	 * @param \TYPO3\CMS\Core\Log\LogRecord $logRecord The log record to process
+	 * @return \TYPO3\CMS\Core\Log\LogRecord The processed log record with additional data
 	 */
-	public function processLogRecord(t3lib_log_Record $logRecord) {
+	public function processLogRecord(\TYPO3\CMS\Core\Log\LogRecord $logRecord) {
 
 		$data = array(
 			'TYPO3_version' => TYPO3_version,

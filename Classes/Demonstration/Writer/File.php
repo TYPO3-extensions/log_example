@@ -38,8 +38,8 @@ class Tx_LogExample_Demonstration_Writer_File {
 	static protected function initializeConfiguration() {
 		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File'] = array(
 			'writerConfiguration' => array(
-				t3lib_log_Level::ERROR => array(
-					't3lib_log_writer_File' => array(
+				\TYPO3\CMS\Core\Log\LogLevel::ERROR => array(
+					'\\TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter' => array(
 						'logFile' => 'typo3temp/logs/log_example/demo.log',
 					)
 				),
@@ -57,13 +57,13 @@ class Tx_LogExample_Demonstration_Writer_File {
 		self::initializeConfiguration();
 
 		$message = 'This error message has been written to file ' .
-			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File']['writerConfiguration'][t3lib_log_Level::ERROR]['t3lib_log_writer_File']['logFile'] .
-			' by using t3lib_log_writer_File'
+			$GLOBALS['TYPO3_CONF_VARS']['LOG']['Tx']['LogExample']['Demonstration']['Writer']['File']['writerConfiguration'][\TYPO3\CMS\Core\Log\LogLevel::ERROR]['\\TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter']['logFile'] .
+			' by using the FileWriter'
 		;
 		$data = array('foo' => 'bar', 'faz' => 'baz');
 
-			// Get a logger for the class
-		$logger = t3lib_div::makeInstance('t3lib_log_LogManager')->getLogger(__CLASS__);
+			/** @var \TYPO3\CMS\Core\Log\Logger $logger */
+		$logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
 
 			// Write to Log
 		$logger->error($message, $data);

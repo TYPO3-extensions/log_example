@@ -31,15 +31,15 @@
  * @package TYPO3
  * @subpackage t3lib
  */
-class Tx_LogExample_Log_Writer_StdErr extends t3lib_log_writer_Abstract {
+class Tx_LogExample_Log_Writer_StdErr extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter {
 
 	/**
 	 * Writes the log record to php://stderr
 	 *
-	 * @param t3lib_log_Record $record Log record
-	 * @return t3lib_log_Record
+	 * @param \TYPO3\CMS\Core\Log\LogRecord $record Log record
+	 * @return \TYPO3\CMS\Core\Log\LogRecord
 	 */
-	public function writeLog(t3lib_log_Record $record) {
+	public function writeLog(\TYPO3\CMS\Core\Log\LogRecord $record) {
 
 		file_put_contents('php://stderr', (string)$record . PHP_EOL);
 
