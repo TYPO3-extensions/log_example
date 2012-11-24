@@ -1,6 +1,6 @@
 <?php
 
-$extensionPath = \TYPO3\CMS\Core\Extension\ExtensionManager::extPath('log_example');
+$extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('log_example');
 $extensionClassesPath = $extensionPath . 'Classes/';
 return array(
 	'tx_logexample_controller_democontroller' => $extensionClassesPath . 'Controller/DemoController.php',
@@ -25,4 +25,5 @@ return array(
 	'tx_logexample_log_processor_typo3version' => $extensionClassesPath . 'Log/Processor/Typo3Version.php',
 	'tx_logexample_log_writer_stderr' => $extensionClassesPath . 'Log/Writer/StdErr.php',
 );
+
 ?>

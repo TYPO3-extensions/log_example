@@ -56,7 +56,7 @@ class Tx_LogExample_Demonstration_Writer_Email {
 	static public function execute() {
 
 		$extKey = 'log_writeremail';
-		if (!\TYPO3\CMS\Core\Extension\ExtensionManager::isLoaded($extKey)) {
+		if (!\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded($extKey)) {
 			return 'Warning. Could not send log to E-Mail, because Extension ' . $extKey . ' is not installed. It can be found at forge.typo3.org';
 		}
 
